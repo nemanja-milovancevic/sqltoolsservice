@@ -14,6 +14,6 @@ namespace Microsoft.SqlTools.ServiceLayer.TableDesigner.Contracts
     {
         public string Value { get; set; }
 
-        public List<string> Values { get; set; }
+        public List<string> Values { get; set; } = new List<string>();
     }
 }

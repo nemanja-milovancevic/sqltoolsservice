@@ -3,6 +3,11 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
 
+using System;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json.Converters;
+
 namespace Microsoft.SqlTools.ServiceLayer.TableDesigner.Contracts
 {
     /// <summary>
@@ -23,5 +28,18 @@ namespace Microsoft.SqlTools.ServiceLayer.TableDesigner.Contracts
         public string ConnectionString { get; set; }
 
         public string Id { get; set; }
+
+        public TableType TableType { get; set; }
+    }
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum TableType
+    {
+        [EnumMember(Value = "Regular")]
+        Regular,
+        [EnumMember(Value = "Node")]
+        Node,
+        [EnumMember(Value = "Edge")]
+        Edge
     }
 }

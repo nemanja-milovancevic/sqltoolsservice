@@ -12,6 +12,9 @@ namespace Microsoft.SqlTools.ServiceLayer.TableDesigner
         public const string Description = "description";
         public const string Columns = "columns";
         public const string ForeignKeys = "foreignKeys";
+        public const string GraphEdgeFromTable = "edgeFrom";
+        public const string GraphEdgeToTable = "edgeTo";
+        public const string TableType = "tableType";
     }
 
     public static class TableColumnPropertyNames

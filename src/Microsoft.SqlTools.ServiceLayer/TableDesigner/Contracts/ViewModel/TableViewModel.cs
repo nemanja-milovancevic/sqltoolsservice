@@ -23,5 +23,11 @@ namespace Microsoft.SqlTools.ServiceLayer.TableDesigner.Contracts
         public TableComponentProperties<CheckConstraintViewModel> CheckConstraints { get; set; } = new TableComponentProperties<CheckConstraintViewModel>();
 
         public InputBoxProperties Script { get; set; } = new InputBoxProperties();
+
+        public InputBoxProperties TableType { get; set; } = new InputBoxProperties();
+
+        public DropdownProperties EdgeFrom { get; set; } = new DropdownProperties();
+
+        public DropdownProperties EdgeTo { get; set; } = new DropdownProperties();
     }
 }

@@ -187,11 +187,23 @@ namespace Microsoft.SqlTools.ServiceLayer.TableDesigner
 
         private TableViewModel GetTableViewModel(TableInfo tableInfo)
         {
+            var tableType = tableInfo.TableType;
             var table = this.GetTable(tableInfo);
             var tableViewModel = new TableViewModel();
             tableViewModel.Name.Value = table.Name;
             tableViewModel.Schema.Value = table.Schema;
             tableViewModel.Description.Value = table.Description;
+            if (tableType != TableType.Regular)
+            {
+                tableViewModel.TableType.Value = tableType.ToString();
+                tableViewModel.TableType.Enabled = false;
+            }
+
+            if (tableType == TableType.Edge)
+            {
+                tableViewModel.EdgeFrom.Values.AddRange(new[] { "", "dbo.Person", "dbo.Product" });
+                tableViewModel.EdgeTo.Values.AddRange(new[] { "", "dbo.Person", "dbo.Product" });
+            }
 
             foreach (var column in table.Columns.Items)
             {
@@ -229,6 +241,7 @@ namespace Microsoft.SqlTools.ServiceLayer.TableDesigner
 
         private TableDesignerView GetDesignerViewInfo(TableInfo tableInfo)
         {
+            var tableType = tableInfo.TableType;
             var view = new TableDesignerView();
             view.ColumnTableOptions.AdditionalProperties.AddRange(new DesignerDataPropertyInfo[] {
                 new DesignerDataPropertyInfo()
@@ -301,6 +314,44 @@ namespace Microsoft.SqlTools.ServiceLayer.TableDesigner
                 });
             view.CheckConstraintTableOptions.canAddRows = true;
             view.CheckConstraintTableOptions.canRemoveRows = true;
+            if (tableType != TableType.Regular)
+            {
+                view.AdditionalTableProperties.Add(new DesignerDataPropertyInfo()
+                {
+                    PropertyName = TablePropertyNames.TableType,
+                    Description = "",
+                    ComponentType = DesignerComponentType.Input,
+                    ComponentProperties = new DropdownProperties
+                    {
+                        Title = "Table Type"
+                    }
+                });
+            }
+            if (tableType == TableType.Edge)
+            {
+                view.AdditionalTableProperties.Add(new DesignerDataPropertyInfo()
+                {
+                    PropertyName = TablePropertyNames.GraphEdgeFromTable,
+                    Description = "",
+                    ComponentType = DesignerComponentType.Dropdown,
+                    Group = "Connection",
+                    ComponentProperties = new DropdownProperties
+                    {
+                        Title = "From"
+                    }
+                });
+                view.AdditionalTableProperties.Add(new DesignerDataPropertyInfo()
+                {
+                    PropertyName = TablePropertyNames.GraphEdgeToTable,
+                    Description = "",
+                    ComponentType = DesignerComponentType.Dropdown,
+                    Group = "Connection",
+                    ComponentProperties = new DropdownProperties
+                    {
+                        Title = "To"
+                    }
+                });
+            }
             return view;
         }
 
