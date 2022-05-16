@@ -10,6 +10,7 @@
 		<PackageReference Update="System.Text.Encoding.CodePages" Version="4.7.1" />
 		<PackageReference Update="System.Text.Encodings.Web" Version="4.7.2" />
 		<PackageReference Update="System.Reactive.Core" Version="5.0.0" />
+		<PackageReference Update="System.Security.Cryptography.Xml" Version="6.0.0" />
 
 		<PackageReference Update="Microsoft.Rest.ClientRuntime" Version="2.3.21" />
 		<PackageReference Update="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />

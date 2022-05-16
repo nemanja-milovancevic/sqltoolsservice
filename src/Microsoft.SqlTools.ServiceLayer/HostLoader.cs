@@ -12,6 +12,7 @@ using Microsoft.SqlTools.Hosting.Protocol;
 using Microsoft.SqlTools.ServiceLayer.Admin;
 using Microsoft.SqlTools.ServiceLayer.Agent;
 using Microsoft.SqlTools.ServiceLayer.AzureFunctions;
+using Microsoft.SqlTools.ServiceLayer.C2S;
 using Microsoft.SqlTools.ServiceLayer.Cms;
 using Microsoft.SqlTools.ServiceLayer.Connection;
 using Microsoft.SqlTools.ServiceLayer.DacFx;
@@ -118,6 +119,10 @@ namespace Microsoft.SqlTools.ServiceLayer
 
             DisasterRecoveryService.Instance.InitializeService(serviceHost);
             serviceProvider.RegisterSingleService(DisasterRecoveryService.Instance);
+
+            //Veljko
+            C2sService.Instance.InitializeService(serviceHost);
+            serviceProvider.RegisterSingleService(C2sService.Instance);
 
             FileBrowserService.Instance.InitializeService(serviceHost);
             serviceProvider.RegisterSingleService(FileBrowserService.Instance);
